@@ -1,0 +1,123 @@
+{% include 'admin/head.html' %}
+
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Default box -->
+      <div class="box box-success" style="overflow-x: scroll;">
+        <div class="box-header">
+          <center>
+            <h1 class="box-title">Data Upload</h1>
+          </center>
+          <p>
+          <h3 class="box-title"></h3>
+          <form class="form-horizontal" action="/admin/predict" enctype="multipart/form-data" style="width: 100%;" method="post">
+            <div class="form-group">
+              <div class="col-sm-8">
+              <label class=" custom-uploader" for="file">Upload Your File</label>
+              </div>
+              <div class="col-sm-6">
+              <input class="form-control" id="file" name="upload" type="file"  />
+              </div>
+              <div class="col-sm-2">
+              <button class="form-control btn btn-success" name="submit" type="submit"> Upload File </button>
+              </div>
+              <div class="col-sm-2">
+                <a href="https://drive.google.com/drive/folders/1sbucR9WXFuEh90GV5YfIbjbXlEniRcSE?usp=share_link">
+                <button class="form-control btn btn-success" name="button" type="button"> Format Upload</button>
+                </a></div>
+          </div>
+          </form>
+        </div>
+        <!-- DataTales Example -->
+        <div class="box-body">
+            <table id="data" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th width="1%">
+                    <center>No</center>
+                  </th>
+                  <th>
+                    <center>Nama</center>
+                  </th>
+                  <th>
+                    <center>Nis</center>
+                  </th>
+                  <th>
+                    <center>Kelas</center>
+                  </th>
+              {% for i in range(1, 21) %}
+              <th>
+                <center>
+                  A{{i}}
+                </center>
+              </th>
+              {% endfor %}
+              <th>
+                <center>Gaya Belajar</center>
+              </th>
+              <th>
+                <center>Action</center>
+              </th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for i in data %}
+                {% if i.6 == "delete" %}
+                {% elif i.6 == "manual" %}
+                {% else %}
+                <tr>
+
+                  <td>{{ i.0 }}</td>
+                  <td>{{ i.2 }}</td>
+                  <td>{{ i.1 }}</td>
+                  <td>{{ i.3 }}</td>
+                  {% for j in datadetail %}
+                  {% if j.1 == i.0 %}
+                  <td>{{ j.3 }}</td>
+                  {% endif %}
+                  {% endfor %}
+                  {% for j in gayabelajar %}
+                  {% if j.0 == i.5 %}
+                  <td>{{ j.1 }}</td>
+                  {% endif %}
+                  {% endfor %}
+                  <td style="width: 300px;">
+                    <center>
+                      <div class="btn-group"style="width: 100%;">
+                        <button type="button" class="btn btn-warning btn-xs btn-flat dropdown-toggle"
+                          data-toggle="dropdown">
+                          <h3 style="margin:0px;padding:0px;">Action</h3>
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu"style="margin:0px;padding:0px;" role="menu">
+                          <li><a href="/admin/hasiltes/{{i.1}}">Detail Hasil</a></li>
+                          <li><a href="/admin/hapusDataset/{{i.0}}"onclick="return confirm('Apakah yakin data peserta ini di hapus?')" >Hapus Data</a></li>
+                            
+                        </ul>
+                      </div>
+                      </center>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include 'admin/js.html' %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#data').dataTable();
+  });
+
+</script>
+
+</body>
+
+</html>

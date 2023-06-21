@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistem Klasifikasi Gaya Belajar</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Favicons
+    ================================================== -->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css"  href="../../static/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"  href="../../static/css/styletab.css">
+<link rel="stylesheet" type="text/css" href="../../static/fonts/font-awesome/css/font-awesome.css">
+
+<!-- Stylesheet
+    ================================================== -->
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/nivo-lightbox/nivo-lightbox.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/nivo-lightbox/default.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+
+  <div class="container"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand page-scroll" href="#page-top">SIKGAB</a> </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="#page-top" class="page-scroll">Gaya Belajar</a></li>
+        <li><a href="#about" class="page-scroll">Mulai Tes</a></li>
+        <li><a href="#testimonials" class="page-scroll">Jenis Gaya Belajar</a></li>
+        <!-- <li><a href="#services" class="page-scroll">Riwayat Identifikasi</a></li> -->
+        <li><a onclick="return confirm('{{session.username}}, Apakah Anda Yakin Ingin Keluar ?');" href="/logout" >Logout</a></li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+</nav>
+<!-- <h1><span></span></h1>
+            <p>.</p> -->
+<!-- Gallery Section -->
+<div id="portfolio" class="text-center">
+  <div class="container">
+    <div class="section-title">
+      <h3>Gaya Belajar Itu Penting?</h3>
+      <p>Gaya belajar adalah kunci untuk mengembangkan kemampuan setiap individu dalam belajar. </br>Jika kita telah mengetahui gaya belajar kita apa, maka kita dapat mengambil langkah- langkah</br> penting untuk membantu diri kita agar belajar lebih cepat dan lebih mudah. Gaya atau cara</br> belajar ini sangat penting untuk diketahui. Kita akan melihat bahwa tiap orang belajar dan </br>mencoba memahami sesuatu dengan caranya masing-masing.</p>
+      <a href="/siswa/pertanyaan/insertHasil"><h4>Klik Disini</h4></a> 
+    </div>
+    <div class="row">
+      <div class="portfolio-items">
+        <div class="col-sm-6 col-md-4 col-lg-4">
+          <div class="portfolio-item">
+            <div class="hover-bg"> 
+              <div class="hover-text">
+                 <a href="#testimonials" class="page-scroll">
+                <h4 > </h4>
+                </div>
+
+              <img src="../../static/img/portfolio/sma.png" class="img-responsive" alt="Project Title"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4">
+          <div class="portfolio-item">
+            <div class="hover-bg"> 
+              <div class="hover-text">
+                <a href="#team" class="page-scroll">
+                <h4 ></h4>
+              </div>
+              <img src="../../static/img/portfolio/sma1.png" class="img-responsive" alt="Project Title"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4">
+          <div class="portfolio-item">
+            <div class="hover-bg"> 
+              <div class="hover-text">
+                <a href="#features" class="page-scroll">
+                <h4 >GAYA BELAJAR KINESTETIK </h4>
+              </div>
+              <img src="../../static/img/portfolio/sma.png" class="img-responsive" alt="Project Title"> </a> </div>
+          </div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+</div>
+<!-- About Section -->
+
+
+<!-- Features Section -->
+<div id="about" class="text-center">
+  <div class="container">
+    <div class="section-title">
+    </br></br></br></br></br></br></br>
+    <h1>Selamat Datang  {{session.username}}</h1>
+      <h1>Untuk Memulai Test Silahkan klik Tombol Dibawah</h1>
+      </br>
+       <!-- <img src="../../static/adminassets/img/logoujian.jpg"class="center" alt="" style="width:120px;height:120px;">  -->
+       </div> 
+    </div>
+   <div class="row">
+      <div class="col-xs-6 col-md-12"> <i class="fa fa-comments-o"></i>
+
+          <a href="/siswa/pertanyaan/insertHasil" class="btn btn-custom btn-lg page-scroll">Mulai Test Gaya Belajarmu</a>  </br></br></br>  
+      </div>
+    </div>
+    </div>
+  </div>
+  </br></br></br></br></br>
+</div>
+</div>
+
+<!-- VISUAL -->
+<div id="testimonials">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6"> <img src="../../static/img/portfolio/1.png" class="img-responsive" alt=""> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h3>GAYA BELAJAR VISUAL</h3>
+          <p><b>Gaya Belajar Visual</b>adalah gaya belajar lebih memfokuskan  pada  penglihatan. Orang visual akan sangat mudah melihat atau membayangkan apa yang dibicarakan.
+                Mereka sering melihat gambar yang berhubungan dengan kata atau perasaan dan mereka akan mengerti suatu informasi bila mereka melihat kejadian, 
+                melihat informasi itu tertulis atau dalam bentuk gambar. Bagi orang yang memiliki gaya ini, mata adalah alat yang paling peka untuk menangkap setiap gejala atau stimulus 
+                (rangsangan) belajar.</p>
+          <h3>Ciri-ciri gaya belajar visual</h3>
+          <div class="list-style">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>
+                <li><p style="font-size: 13px" >&bull; siswa yang memiliki gaya belajar ini memerlukan bukti-bukti konkret yang harus diperlihatkan supaya siswa paham atas apa yang disampaikan.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Cenderung melihat, mengamati, memandang pada saat dijelaskan.</p></li>
+                <li><p style="font-size: 13px" >&bull; Menyukai kerapian dan ketrampilan.</p></li>
+              </ul>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>                
+                <li><p style="font-size: 13px" >&bull; Berbicara cenderung lebih cepat.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Mengingat sesuatu dengan penggambaran (asosiasi) visual.</p></li>
+                <li><p style="font-size: 13px" >&bull; Dapat duduk tenang ditengah situasi yang rebut dan ramai tanpa terganggu.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- AUDIO -->
+<div id="team">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6"> <img src="../../static/img/portfolio/2.png" class="img-responsive" alt=""> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h3>GAYA BELAJAR AUDITORIAL</h3>
+          <p><b>Gaya belajar Auditorial</b> gaya belajar dengan cara mendengar. Individu dengan gaya belajar ini, 
+                lebih dominan dalam menggunakan indera pendengaran untuk melakukan aktivitas belajar. Individu mudah belajar, 
+                mudah menangkap stimulus atau rangsangan apabila melalui alat indera pendengaran (telinga). Individu dengan gaya belajar auditorial memiliki kekuatan pada kemampuannya untuk mendengar.</p>
+          <h3>Ciri-ciri gaya belajar Auditory</h3>
+          <div class="list-style">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>
+                <li><p style="font-size: 13px" >&bull; Lebih cepat mernyerap yang didengarkan.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Saat belajar sering berbicara pada diri sendiri.</p></li>
+                <li><p style="font-size: 13px" >&bull; Senang membaca dengan keras dan mendengarkan sesuatu.</p></li>
+              </ul>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>                
+                <li><p style="font-size: 13px" >&bull; Merasa kesulitan untuk menulis tetapi mudah dalam bercerita</p> </li>
+                <li><p style="font-size: 13px" >&bull; Suka berdiskusi dan dapat dengan mudah bersosialisasi.</p></li>
+                <li><p style="font-size: 13px" >&bull; Orang auditori mengekspresikan diri mereka melalui suara</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+
+<!-- AUDIO -->
+<div id="team">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6"> <img src="../../static/img/portfolio/4.png" class="img-responsive" alt=""> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h3>GAYA BELAJAR MEMBACA DAN MENULIS</h3>
+          <p><b>Gaya belajar Membaca dan Menulis</b> Gaya Belajar Membaca dan Menulis Siswa dengan gaya belajar baca/tulis lebih suka memperoleh informasi
+               dalam bentuk teks grafis dan bukan gambar, yang memuat kata-kata, kalimat, paragraf, atau wacana. Siswa dengan gaya ini lebih nyaman dalam aktivitas 
+               belajar dengan input dan output dalam bentuk teks</p>
+          <h3>Ciri-Ciri Gaya Belajar Membaca dan Menulis</h3>
+          <div class="list-style">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>
+                <li><p style="font-size: 13px" >&bull; Lebih suka membaca seperti majalah, artikel, maupun buku pelajaran.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Siswa dengan gaya ini lebih nyaman dalam aktivitas belajar dengan input dan output dalam bentuk teks.</p></li>
+                <li><p style="font-size: 13px" >&bull; Mencatat dan meringkas informasi yang dibaca.</p></li>
+              </ul>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>                
+                <li><p style="font-size: 13px" >&bull; Mencatat dan meringkas informasi yang dibaca. </p> </li>
+                <li><p style="font-size: 13px" >&bull; Kurang cakap dalam menyampaikan sesuatu </p></li>
+                <li><p style="font-size: 13px" >&bull; Senang mengerjakan tugas secara mandiri </p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+
+
+<!-- KINES -->
+<div id="features">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6"> <img src="../../static/img/portfolio/3.png" class="img-responsive" alt=""> </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h3>GAYA BELAJAR KINESTETIK</h3>
+          <p><b>Gaya belajar Kinestetik</b> gaya belajar dengan cara bergerak, bekerja, dan menyentuh. 
+                Individu yang memiliki kemampuan gaya belajar kinestetik ini haruslah menyentuh segala sesuatu 
+                yang memberikan informasi, dengan cara itu siswa yang bertipe gaya belajar ini dapat memahami dan mengingat informasi tersebut.</p>
+          <h3>Ciri-ciri gaya belajar Kinestetik</h3>
+          <div class="list-style">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>
+                <li><p style="font-size: 13px" >&bull; Orang kinestetik sangat peka terhadap perasaan atau emosi dan pada sensasi sentuhan dan gerakan.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Lebih suka melakukan contoh peragaan daripada membuat laporan.</p></li>
+                <li><p style="font-size: 13px" >&bull; Lebih suka praktik daripada teori</p></li>
+              </ul>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+              <ul>                
+                <li><p style="font-size: 13px" >&bull; Tulisan tangan biasanya tidak rapi.</p> </li>
+                <li><p style="font-size: 13px" >&bull; Berbicara dengan perlahan, menyentuh untuk mendapatkan perhatian</p></li>
+                <li><p style="font-size: 13px" >&bull; Suka menggunakan objek nyata sebagai alat bantu belajar.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+
+</body>
+</html>
+
+
+ <!-- JavaScript files-->
+<script src="../../static/js/tabs.js"></script>
+<script type="text/javascript" src="../../static/js/jquery.1.11.1.js"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"></script> 
+<script type="text/javascript" src="../../static/js/SmoothScroll.js"></script> 
+<script type="text/javascript" src="../../static/js/nivo-lightbox.js"></script>  
+<script type="text/javascript" src="../../static/js/contact_me.js"></script> 
+<script type="text/javascript" src="../../static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% include 'admin/header.html' %}
+
+ <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Tambah admin</h1>
+
+          <div class="row">
+
+            <div class="col-lg-6">
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary" value="">form tambah admin </h6>
+                </div>
+                <div class="card-body">
+               
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                      <div class="form-group" style="outline-color: none">
+                          <label class="col-lg-5 control-label">No Induk</label>
+                            <div class="col-lg-5">
+                            <!-- <input type="hidden" name="password"> -->
+                            <input type="text" name="noinduk" type="noinduk">
+                            </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label">Nama</label>
+                          <div class="col-lg-5">
+                            <input type="text" name="nama" value="">
+                          </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Kelas</label>
+                      <div class="col-lg-5">
+                        <input type="kelas" name="kelas" value="">
+                      </div>
+                    </div>
+                            <div class="form-group">
+                              <label class="col-lg-5 control-label">Password Baru</label>
+                                <div class="col-lg-5">
+                                  <input type="password" name="password" value="">
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-lg-2 control-label">Level</label>
+                                    <div class="col-lg-5">
+                                      <input type="text" name="level" value="">
+                                    </div>
+                              </div>
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                          <div class="col-lg-5">
+                            <div class="form-group">
+                              <div class="col-lg-10">
+                                <label class="col-lg-1 control-label"></label>
+                                
+                                    <input type="submit" value="Tambah" class="btn btn-primary" style="margin-left: 270px" >
+  
+                              </div>
+                            </div>
+                      </div>
+            
+  </form>
+
+                </div>
+              </div>
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+      {% include 'admin/footer.html' %}

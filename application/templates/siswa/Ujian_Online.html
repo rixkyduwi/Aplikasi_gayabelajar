@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://localhost/ujianonline/ruang_ujian/soal/33#no-back-button -->
+<html style="height: auto; min-height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tes GB</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/font-awesome.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/ionicons.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/AdminLTE.min.css') }}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/_all-skins.min.css') }}">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/morris.css') }}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/jquery-jvectormap.css') }}">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/bootstrap-datepicker.min.css') }}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/daterangepicker.css') }}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/bootstrap3-wysihtml5.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/dataTables.bootstrap.min.css') }}">
+  <!-- select2 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/select2.min.css') }}">
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/bootstrap-timepicker.min.css') }}">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/all.css') }}">
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Ujian_Online_files/css.css') }}">
+  
+<!--tambahkan custom css disini-->
+
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;box-sizing: content-box;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+<body class="skin-green layout-top-nav fixed" style="height: auto; min-height: 100%;">
+<div class="wrapper" style="height: auto; min-height: 100%;">
+
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="http://localhost/ujianonline/ruang_ujian/soal/33#" class="navbar-brand"><b>Tes</b> Klasifikasi Gaya Belajar</a>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="http://localhost/ujianonline/ruang_ujian/soal/33#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="{{ url_for('static', filename='Ujian_Online_files/avatar.png') }}" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">Halo, {{session.username}}</span>
+              </a>              
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-custom-menu -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Full Width Column -->
+  <div class="content-wrapper" style="min-height: 769.75px;">
+    <div class="container">
+<!-- Content Header (Page header) -->
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+               <center> <h3 class="box-title">Soal Tes Gaya Belajar</h3> </center>
+            </div><!-- /.box-header -->
+            <div class="box-body" style="overflow-y: scroll;height: 525px;">
+                <form id="formSoal" role="form" action="/siswa/predict" method="post" onsubmit=" return confirm('Anda Yakin?')" >
+                    
+                  {% for row in siswapertanyaan %}
+                        <div class="form-group">            
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td width="1%"></td>
+                                        <td><p>{{ row.0 }}.{{ row.2 }}</p>
+                                            <input type="radio" name="jawaban[{{row.0}}]" value="1" required=""> 1<br>
+                                            <input type="radio" name="jawaban[{{row.0}}]" value="2" required=""> 2<br>
+                                            <input type="radio" name="jawaban[{{row.0}}]" value="3" required=""> 3<br>
+                                            <input type="radio" name="jawaban[{{row.0}}]" value="4" required=""> 4<br>
+                                      </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    
+                        {% endfor %}
+                    <button type="submit" class="btn btn-primary btn-flat pull-right">Submit</button>
+                </form>
+                <div class="box-footer">
+
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </div>    
+</div>
+    
+
+</section><!-- /.content -->
+
+  </div>
+  </div><!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+  	<div class="pull-right hidden-xs">
+
+  	</div>
+  	<strong>Copyright © 2023 <a href="http://localhost/ujianonline/ruang_ujian/soal/33#"></a></strong> Sistem Klasifikasi Gaya Belajar | All rights reserved.
+
+  </div>
+
+  <!-- jQuery 3 -->
+  <script src="../../static/Ujian_Online_files/jquery.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/jquery-3.3.1.js.download"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="../../static/Ujian_Online_files/jquery-ui.min.js.download"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+  	$.widget.bridge('uibutton', $.ui.button);
+  </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="../../static/Ujian_Online_files/bootstrap.min.js.download"></script>
+  <!-- Morris.js charts -->
+  <script src="../../static/Ujian_Online_files/raphael.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/morris.min.js.download"></script>
+  <!-- Sparkline -->
+  <script src="../../static/Ujian_Online_files/jquery.sparkline.min.js.download"></script>
+  <!-- jvectormap -->
+  <script src="../../static/Ujian_Online_files/jquery-jvectormap-1.2.2.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/jquery-jvectormap-world-mill-en.js.download"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="../../static/Ujian_Online_files/jquery.knob.min.js.download"></script>
+  <!-- daterangepicker -->
+  <script src="../../static/Ujian_Online_files/moment.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/daterangepicker.js.download"></script>
+  <!-- datepicker -->
+  <script src="../../static/Ujian_Online_files/bootstrap-datepicker.min.js.download"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="../../static/Ujian_Online_files/bootstrap3-wysihtml5.all.min.js.download"></script>
+  <!-- Slimscroll -->
+  <script src="../../static/Ujian_Online_files/jquery.slimscroll.min.js.download"></script>
+  <!-- FastClick -->
+  <script src="../../static/Ujian_Online_files/fastclick.js.download"></script>
+  <!-- AdminLTE App -->
+  <script src="../../static/Ujian_Online_files/adminlte.min.js.download"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="../../static/Ujian_Online_files/dashboard.js.download"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../../static/Ujian_Online_files/demo.js.download"></script>
+  <script src="../../static/Ujian_Online_files/ad.js.download"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="../../static/Ujian_Online_files/js"></script>
+  <!-- Datatables -->
+  <script src="../../static/Ujian_Online_files/datatables.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/jquery.dataTables.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/dataTables.bootstrap.min.js.download"></script>
+
+  <script src="../../static/Ujian_Online_files/daterangepicker.js.download"></script>
+
+  <script src="../../static/Ujian_Online_files/bootstrap-datepicker.min.js.download"></script>
+
+  <script src="../../static/Ujian_Online_files/bootstrap-colorpicker.min.js.download"></script>
+
+  <script src="../../static/Ujian_Online_files/bootstrap-timepicker.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/select2.full.min.js.download"></script>
+  <!-- iCheck 1.0.1 -->
+  <script src="../../static/Ujian_Online_files/icheck.min.js.download"></script>
+  <!-- timer -->
+  <script src="../../static/Ujian_Online_files/jquery.plugin.min.js.download"></script>
+  <script src="../../static/Ujian_Online_files/jquery.countdown.min.js.download"></script>
+
+<!--tambahkan custom js disini-->
+
+<script type="text/javascript">
+    // var countDownDate = new Date("").getTime();
+    // var x = setInterval(function() {
+    //     var now = new Date().getTime();
+    //     var distance = countDownDate - now;
+    //     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //     hours = hours < 10 ? "0" + hours : hours;
+    //     minutes = minutes < 10 ? "0" + minutes : minutes;
+    //     seconds = seconds < 10 ? "0" + seconds : seconds;
+    //     document.getElementById("counter").innerHTML = hours + ":" + minutes + ":" + seconds;
+    //     if (distance < 0) {
+    //         document.getElementById("counter").innerHTML = "WAKTU UJIAN HABIS";
+    //         document.getElementById("formSoal").submit();
+    //     }
+    // }, 1000);
+    
+    
+    
+
+
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";
+window.onhashchange=function(){window.location.hash="no-back-button";}
+</script>
+
+
+
+<div class="jvectormap-label"></div></body></html>

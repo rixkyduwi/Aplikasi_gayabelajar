@@ -1,0 +1,41 @@
+{% include 'admin/head.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rekap</title>
+  <script src='https://cdn.plot.ly/plotly-2.20.0.min.js'></script>
+</head>
+
+<body>
+  <center>
+    <h2> Hasil Rekapitulasi Sistem Klasifikasi Gaya Belajar</h2>
+    <div id='myDiv' style="width: 100%; height: 100%;"><!-- Plotly chart will be drawn inside this DIV --></div>
+    <!--<a href="/admin/tampiladmin" class="button">Kembali</a>-->
+  </center>
+  
+  <script>
+    var value = '{{value}}';
+    var data = [{
+      values: JSON.parse(value),
+      labels: ['Visual', 'Auditorial', 'Membaca Menulis', 'Kinestetik'],
+      type: 'pie',
+      
+    }];
+
+    var layout = {
+      height: 700,
+      width: 1200,
+
+    };
+
+    Plotly.newPlot('myDiv', data, layout);
+  </script>
+
+</body>
+
+</html>
+{% include 'admin/js.html' %}

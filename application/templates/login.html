@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN </title>
+</head>
+
+<body>
+  <style>
+    /* Bordered form */
+    form {
+      border: 3px solid #f1f1f1;
+    }
+
+    /* Full-width inputs */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Add a hover effect for buttons */
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Extra style for the cancel button (red) */
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    /* Center the avatar image inside this container */
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    /* Avatar image */
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+      margin: 20px;
+      padding-left: 500px;
+      padding-right: 500px;
+    }
+
+    /* The "Forgot password" text */
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+  </style>
+      <!-- Contact Section -->
+  <div class="section-title">
+    <center>
+      <h2>LOGIN ADMIN & SISWA</h2>
+    </center>
+  </div>
+ 
+  <form action="/aksilogin" method="post">
+    <div class="imgcontainer">
+      <img src="../static/img/portfolio/admin.jpg" alt="Avatar" width="30px" height="250px" class="avatar">
+    </div>
+    <div id="alert" class="alert bg-danger warning" style="display: none;"><p ></p></div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+  
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn">Kembali</button>
+    </div>
+  </form>
+<script>
+  function GetURLParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+var alertcontainer = document.getElementById('alert');
+var alert = GetURLParameter('alert');
+console.log(alert)
+if (alert == undefined ){
+
+}
+else{
+alertcontainer.style.display = 'block';  
+alertcontainer.innerHTML = "<center><p style='color :red'>"+alert+"</p></center>";
+}
+
+</script>
+</body>
+
+</html>

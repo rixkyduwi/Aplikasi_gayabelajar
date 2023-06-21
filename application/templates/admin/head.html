@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <title>Admin SIKGAB</title>
+     <link rel="shortcut icon" href="image/fav.png">
+     <!-- Tell the browser to be responsive to screen width -->
+     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+     <!-- Bootstrap 3.3.7 -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/font-awesome/css/font-awesome.min.css') }}">
+     <!-- Ionicons -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/Ionicons/css/ionicons.min.css') }}">
+     <!-- Theme style -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/AdminLTE.min.css') }}">
+     <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/skins/_all-skins.min.css') }}">
+     <!-- Morris chart -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/morris.js/morris.css') }}">
+     <!-- jvectormap -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/jvectormap/jquery-jvectormap.css') }}">
+     <!-- Date Picker -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+     <!-- Daterange picker -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+     <!-- bootstrap wysihtml5 - text editor -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='dataTables/DataTables/css/dataTables.bootstrap.min.css') }}">
+     <!-- select2 -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/select2/dist/css/select2.min.css') }}">
+     <!-- Bootstrap time Picker -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/timepicker/bootstrap-timepicker.min.css') }}">
+     <!-- iCheck for checkboxes and radio inputs -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/iCheck/all.css') }}">
+
+     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+     <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+     <!-- Google Font -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/css.css') }}">
+     <!-- Left side column. contains the logo and sidebar -->
+     <!-- begin body -->
+</head>
+<body class="skin-green sidebar-mini fixed">
+  <div class="wrapper">
+  
+    <header class="main-header">
+      <!-- Logo -->
+      <span class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>S</b>G </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>SIKGAB</b></span>
+      </span>
+     
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="padding-bottom: 5px;">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+  
+  
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="" class="user-image" alt="User Image">
+                <span class="hidden-xs">Halo, {{session['username']}}</span>
+              </a>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <!--<div class="pull-left info">
+            <p><?php echo $this->session->userdata('nama'); ?></p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
+        </div>-->
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" >
+        
+          <!-- Menu Home -->
+          <li>
+            <a href="admin/home">
+              <h3 style="margin: 0px; padding: 0px;">Interface</h3>
+            </a>
+          </li>
+
+
+          <!-- Dashboard ADMIN -->          
+              <li >
+                <a href="/admin/tampiladmin"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                </svg> <span style="margin: 0px; padding: 0px; font-size: 20px;">Data User</span></a>
+              </li>
+              <li >
+                <a href="/admin/tampil_gb"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-question" viewBox="0 0 16 16">
+                  <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
+                  <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                  <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                </svg><span style="margin: 5px; padding: 0px; font-size: 20px;">Data Gaya Belajar</span></a>
+              </li>
+              <li >
+                <a href="/admin/tampil_pertanyaan"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                  <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                  <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                </svg><span style="margin: 5px; padding: 0px; font-size: 20px;">Data Pertanyaan</span></a>
+              </li>
+              <li >
+                <a href="/admin/upload_file"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16">
+                  <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/>
+                </svg><span style="margin: 5px; padding: 0px; font-size: 20px;">Upload</span></a>
+              </li>
+              <li class="treeview">
+                <a href="/admin/rekap"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                  <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z"/>
+                </svg> <span style="margin: 5px; padding: 0px; font-size: 20px;">Rekapitulasi</span></a>
+              </li>
+              
+          <li  class="treeview">
+            <a class="" onclick="return confirm('{{session.username}}, Apakah Anda Yakin Ingin Keluar ?');" href="/logout"><i class="fa fa-power-off"></i>
+              <span style="margin: 5px; padding: 0px; font-size: 20px;">Logout</span>
+            </a>
+          </li>
+
+
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+ 
+
+  

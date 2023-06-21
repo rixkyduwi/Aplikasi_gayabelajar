@@ -1,0 +1,54 @@
+{"intents": [
+        {"tag": "hai",
+         "patterns": ["Hai ", "Hello", "Good", "hallo"],
+         "responses": ["Hai selamat datang Di aplikasi Sistem Klasifikasi Gaya Belajar (SIKGAB) berbasis website saya boot adakah yang saya bantu ?"],
+         "context_set": [""]
+        },
+        {"tag": "Aplikasi",
+         "patterns": [ "aplikasi apa ini ?", "aplikasi","sitem apa ini ?","sistem"],
+         "responses": ["Merupakan sebuah sistem yang dapat mengklasifikasikan 4 gaya belajar yang biasa disebut dengan sebutan VARK (Visual, Auditorial, Read and Write, Kinestetik "],
+         "context_set": [""]
+        },
+        {"tag": "gaya belajar",
+         "patterns": [" apa itu gaya belajar", "gaya belajar", "gaya ", "gb  yaitu ","gayabelajar"],
+         "responses": ["Gaya belajar adalah cara belajar seseorang dalam memperoleh pengetahuan, menyerap informasi, cara mengingat, berpikir dan memecahkan masalah secara berbeda-beda yang berkaitan dengan pribadi masing-masing sesuai dengan lingkungan belajarnya "],
+         "context_set": [""]
+        },
+        {"tag": "Visual",
+         "patterns": ["Visual","visual", "gaya belajar visual ", "Gaya Belajar Visual"],
+         "responses": ["Gaya belajar visual adalah gaya belajar dengan cara melihat, mengamati, memandang, dan sejenisnya. Kekuatan gaya belajar ini terletak pada indera penglihatan. Bagi orang yang memiliki gaya ini, mata adalah alat yang paling peka untuk menangkap setiap gejala atau stimulus (rangsangan) belajar.  "],
+         "context_set": [""]
+        },
+        {"tag": "Auditorial",
+         "patterns": ["auditorial", "apa sih auditorial ", "auditory"],
+         "responses": ["Gaya belajar auditorial adalah gaya belajar dengan cara mendengar. Individu dengan gaya belajar ini, lebih dominan dalam menggunakan indera pendengaran untuk melakukan aktivitas belajar. Individu mudah belajar, mudah menangkap stimulus atau rangsangan apabila melalui alat indera pendengaran (telinga). "],
+         "context_set": [""]
+        },
+        {"tag": "read and write",
+         "patterns": ["read and write ", "read", "write","apa sih auditory"],
+         "responses": ["Siswa dengan gaya belajar baca/tulis lebih suka memperoleh informasi dalam bentuk teks grafis dan bukan gambar, yang memuat kata-kata, kalimat, paragraf, atau wacana. Siswa dengan gaya ini lebih nyaman dalam aktivitas belajar dengan input dan output dalam bentuk teks."],
+         "context_set": [""]
+        },
+        {"tag": "kinestetik",
+         "patterns": ["kinestetik", "apa itu kinestetik", "kinestetik ","kinestetik adalah"],
+         "responses": ["Gaya belajar kinestetik adalah gaya belajar dengan cara bergerak, bekerja, dan menyentuh. Maksudnya ialah belajar dengan mengutamakan indera perasa dan gerakan-gerakan fisik. Individu dengan gaya belajar ini lebih mudah menangkap pelajaran apabila bergerak, meraba, atau mengambil tindakan."],
+         "context_set": [""]
+        },
+        {"tag": "cara pengunaan aplikasi",
+        "patterns": ["cara kerja", "bagaimana menggunakannya", "cara","cara gunakan sistem ini"],
+        "responses": ["cara pengunaan sistem ini terdapat 2 aktor yaitu sebagai admin dan siswa adapun langkah-langkah sebagai siswa 1. Login masukan username(nama) dan password(nis) 2. Masuk kehalaman beranda user 3. klik menu mulai test 4. Kerjakan soal yang ada 5. Muncul hasil klasifikasi sedangkan untuk admin 1. Login dengan username dan password 2. admin dapat melihat dan mengedit fitur yang tersedia disistem"],
+        "context_set": [""]
+       },
+       {"tag": "fitur aplikasi",
+       "patterns": ["fitur", "fitur sistem", "fitur yang tersedia"],
+       "responses": ["fitur yang tersedia untuk siswa 1. Pemahaman mengenai gaya belajar 2. Mulai test 3. Metode belajar yang tepat 4. Hasil Klasifikasi sedangkan untuk admin 1. fitur user 2. fitur gaya belajar 3. fitur pertanyaan 4. fitur hasil klasifikasi 5. fitur hasil plot"],
+       "context_set": [""]
+      },
+
+       {"tag": "terima kasih",
+        "patterns": ["terima kasih", "sampai jumpa", "bye"],
+        "responses": ["sama-sama","sampai jumpa lagi","dadah "],
+        "context_set": [""]
+}
+   ]
+}

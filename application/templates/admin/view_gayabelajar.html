@@ -1,0 +1,50 @@
+{% include 'admin/head.html' %}
+
+<section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Default box -->
+        <div class="box box-success" style="overflow-x: scroll;">
+          <div class="box-header">
+            <center><h4 class="box-title">Jenis Gaya Belajar</h4></center><p>
+            <h3 class="box-title"></h3>
+          </div>
+          <div class="box-body">
+            <table id="data" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th width="1%">
+                    <center>id_gayabelajar</center>
+                </th>
+                  <th><center>Gaya Belajar</center>
+                </th>
+                  <th width="12%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in gayabelajar %}
+                  <tr>
+                    <td><center>{{row.0}}</center></td>
+                    <td><center>{{row.1}}</center></td>
+                    <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-warning btn-flat btn-xs">Action</button>
+                          <button type="button" class="btn btn-warning btn-xs btn-flat dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="/admin/editgayabelajar/{{row.0}}">Edit Data</a></li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% include 'admin/js.html' %}

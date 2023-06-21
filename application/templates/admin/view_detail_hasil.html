@@ -1,0 +1,61 @@
+{% include 'admin/head.html' %}
+
+<section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Default box -->
+        <div class="box box-success" style="overflow-x: scroll;">
+          <div class="box-header">
+            <center><h4 class="box-title">DETAIL HASIL</h4></center><p>
+            <h3 class="box-title"></h3>
+          </div>
+          <div class="box-body">
+            <table id="data" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th >
+                    <center>Nama</center>
+                </th>
+                  <th><center>Tanggal Ujian</center>
+                </th>
+                <th><center>Gaya Belajar</center>
+                </th>
+                  <th width="12%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data %}
+                  <tr>
+                    <td><center>{{row.1}}</center></td>
+                    <td><center>{{row.2}}</center></td>
+                    <td><center>
+                      {% if row.3==0 %}
+                     Auditorial
+                      {% elif row.3==1 %}
+                      Kinestetik
+                      {% elif row.3==2 %}
+                      Membaca dan Menulis(Read and Write)
+                      {% elif row.3==3 %}
+                      Visual
+                      {% endif %}
+                    </center></td>
+                    <td>
+                        <div class="btn-group">
+                          <a href="/admin/prediksi/{{row.0}}" class="btn btn-primary btn-flat pull-right" target="_blank"><i class="fa fa-print"></i> Cetak </a>
+                </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% include 'admin/js.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+

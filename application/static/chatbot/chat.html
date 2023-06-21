@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="chatbox">
+        <div class="chatbox__support" style="padding:2em;border-radius: 20px;"">
+            <div class="chatbox__header" style="padding:1em;border-radius: 20px;">
+                Chat support!
+            </div>
+            <div class="chatbox__messages">
+                <div>
+                    <div class="messages__item messages__item--visitor" style="padding:1em;border-radius: 20px;">
+                        Halo
+                    </div>
+                    <div class="messages__item messages__item--operator" style="padding:1em;border-radius: 20px;">
+                        Apa ini Krusty Krab ?
+                    </div>
+                    .<div class="messages__item messages__item--typing">
+                        <span class="messages__dot"></span>
+                        <span class="messages__dot"></span>
+                        <span class="messages__dot"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbox__footer row">
+                <input type="text" placeholder="Tulis Pesan" class="col-8 form-control">
+                <button class="col-4 btn btn-primary">Kirim</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button class="btn btn-primary">Branch-1</button>
+        </div>
+    </div>
+    
+    <script src="./Chat.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

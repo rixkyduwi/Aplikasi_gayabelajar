@@ -1,0 +1,77 @@
+{% include 'admin/header.html' %}
+
+<!-- Begin Page Content -->
+       <div class="container-fluid">
+
+         <!-- Page Heading -->
+         <h1 class="h3 mb-2 text-gray-800">Tabel Data Training</h1>
+        
+
+         <!-- DataTales Example -->
+         <div class="card shadow mb-4">
+           <div class="card-header py-3">
+             <h6 class="m-0 font-weight-bold text-primary">Data Training</h6>
+           </div>
+
+           <div class="card-body">
+                           <a href="/admin/upload_file" class="btn btn-xs btn-info" style="margin-bottom: 15px"> <i class="fas fa-info-circle"> Tambah Data Training</i></a></br>
+
+             <div class="table-responsive">
+
+                
+               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                                               <tr>
+                                               
+                                                   <th  data-field="state" data-checkbox="" ><center>No.</center></th>
+                                                   <th ><center>Nama</center></th>
+                                                {% for i in 1..20 %}   
+                                                   <th ><center>
+                                                     A{{i}}
+                                                   </center></th>
+                                                {% endfor %}
+                                                   <th ><center>Gaya Belajar</center></th>
+                                                   <th ><center>Action</center></th>
+                                               </tr>
+                                           </thead>
+                                           <tbody>
+                                            {% i=1; for row in dataset %}
+                                               <tr>
+                                               
+                                                  <td>{% i++ %}</td>
+                                                  <td >{{row[nama]}}</td>
+                                                  <td >{{row[nis]}}</td>
+                                                  <td >{{ row[kelas]}}</td>
+                                                  {% for i in 1..20 %} 
+                                                    A{{i}}
+                                               {% endfor %}
+                                                   <?php foreach ($datadetail as $keys) {
+                                                     if ($key->id_dataset==$keys->id_dataset) { ?>
+                                                   <td ><?php echo $keys->nilai; ?></td>
+                                                <?php }
+                                                   } ?>
+                                                  <td><?php echo $key->gaya_belajar;?></td>
+                                                   <td><center>
+                                                  <a onclick="return confirm('Yakin ingin menghapus data ini?');" href='/admin/hapusDataset/{{i}}' class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                                                   </center>
+                                                   </td>
+                                                 
+                                               </tr>
+                                               <?php } ?>
+                                           </tbody>
+               </table>
+               {% endfor %}
+             </div>
+           </div>
+         </div>
+
+       </div>
+       <!-- /.container-fluid -->
+
+     </div>
+     <!-- End of Main Content -->
+     {% include 'admin/footer.html' %}
+
+
+
+

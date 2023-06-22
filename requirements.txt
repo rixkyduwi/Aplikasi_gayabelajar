@@ -1,5 +1,6 @@
 Flask
 Flask-WTF
+Flask-MySQLdb
 python-dotenv
 virtualenv
 WTForms

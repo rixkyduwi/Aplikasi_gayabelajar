@@ -3,7 +3,7 @@ Flask-WTF
 python-dotenv
 virtualenv
 WTForms
-sklearn
+scikit-learn
 numpy
 nltk
 keras

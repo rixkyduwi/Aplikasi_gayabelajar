@@ -4,6 +4,7 @@ python-dotenv
 virtualenv
 WTForms
 scikit-learn
+gunicorn
 numpy
 nltk
 keras

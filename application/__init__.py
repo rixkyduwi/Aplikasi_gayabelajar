@@ -98,6 +98,7 @@ def aksilogin():
     cur =  mysql.connection.cursor()
     cur.execute("Select id_login,no_induk, nama,kelas, level, password from login where nama = %s ",(username,)) 
     user = cur.fetchone()
+    print(user)
     if user is not None and len(user) > 0:        
         session['loggedin']=True
         session['id'] = user[0]
@@ -491,12 +492,3 @@ def chatbot_response(msg):
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
-
-@app.route("/rekap")
-def rekap():
-   return render_template('admin/rekap.html')
-
-
-
-
-

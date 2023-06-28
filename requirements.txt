@@ -12,3 +12,4 @@ nltk
 keras
 joblib
 pandas
+python-dotenv

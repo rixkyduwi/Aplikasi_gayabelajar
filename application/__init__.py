@@ -110,7 +110,7 @@ def aksilogin():
             if user[4] == 'admin':
                 return redirect(url_for('tampiladmin'))
             elif user[4] == "siswa":
-                return redirect(url_for('viewsiswa'))
+                return redirect(url_for('view_siswa'))
         else:
             flash("Gagal, username dan password tidak cocok")
             return redirect(url_for('login'))
@@ -124,7 +124,7 @@ def aksilogin():
 @app.route("/login")
 def login():
     return render_template("login1.html")
-@app.route("/siswa")
+@app.route("/siswa", endpoint="view_siswa")
 @roles_required('siswa')
 def viewsiswa():
     return render_template("siswa/view_siswa.html")

@@ -7,7 +7,7 @@ import string
 from time import time
 import time
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -20,10 +20,7 @@ import joblib
 ALLOWED_EXTENSIONS = set(['xlsx'])
 def allowed_file(filename):     
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-import os
-from dotenv import load_dotenv
-load_dotenv()
-app.config['host']= os.environ.get('host')
+
 # time sesion
 app.config.update(dict(
 SECRET_KEY="powerful secretkey",
@@ -33,10 +30,9 @@ a=time.localtime()
 tanggal=""+str(time.gmtime().tm_year)+"-"+str(a.tm_mon)+"-"+str(a.tm_mday)+""
 def convertTuple(tup):
     return ''.join([str(x) for x in tup])
-def roles_required(*role_names):
-    def decorator(original_route):
-        @wraps(original_route)
-        def decorated_route(*args, **kwargs):
+def roles_required(role):
+    def decorator(view_func):
+        def wrapper(*args, **kwargs):
             if 'loggedin' in session:
             # User is loggedin show them the home page
                 print(session['time'])
@@ -48,30 +44,28 @@ def roles_required(*role_names):
                     session.pop('username', None)
                     session.pop('time', None)
                     return redirect(url_for('index'))
-                if not session['role'] in role_names:
+                if not session['role'] in role:
                     print('The user does not have this role.')
-                    return redirect(url_for('index'))
+                    return render_template('403.html')
                 else:
                     print(session['time'])
                     print(""+str(time.localtime().tm_year)+"-"+str(time.localtime().tm_mon)+"-"+str(time.localtime().tm_mday)+"")
                     print('The user is in this role.')
-                    return original_route(*args, **kwargs)
+                    return view_func(*args, **kwargs)
             else:
                 return redirect(url_for('index'))
-        return decorated_route
+ 
+        return wrapper
     return decorator
-
-# Konfigurasi Mysql
-
-
-app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
-app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
-app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
-# Intialize MySQL
+#Konfigurasi Mysql
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'databasegaya'
+#Intialize MySQL
 mysql = MySQL(app)
 
-# SOURCE CODE CHATBOT
+#SOURCE CODE CHATBOT
 import nltk
 nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
@@ -86,7 +80,7 @@ intents = json.loads(open('chatbot/data.json').read())
 words = pickle.load(open('chatbot/texts.pkl','rb'))
 classes = pickle.load(open('chatbot/labels.pkl','rb'))
 
-# FUNGSI LOGIN
+#FUNGSI LOGIN
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -98,7 +92,6 @@ def aksilogin():
     cur =  mysql.connection.cursor()
     cur.execute("Select id_login,no_induk, nama,kelas, level, password from login where nama = %s ",(username,)) 
     user = cur.fetchone()
-    print(user)
     if user is not None and len(user) > 0:        
         session['loggedin']=True
         session['id'] = user[0]
@@ -127,19 +120,20 @@ def aksilogin():
 def login():
     return render_template("login1.html")
 @app.route("/siswa")
+@roles_required('siswa')
 def viewsiswa():
     return render_template("siswa/view_siswa.html")
-@app.route("/admin/view_pernyataan")
-def insertPernyataan():
-  return render_template("admin/view_detail_hasil.html")   
-@app.route("/admin/home")
-def home():
-    cur =  mysql.connection.cursor()
-    cur.execute("Select * from login") 
-    home = cur.fetchall()    
-    print(home)
-    return render_template("admin/home.html", home=home) 
-# CRUD ADMIN VIEW
+#@app.route("/admin/view_pernyataan")
+#def insertPernyataan():
+#   return render_template("admin/view_detail_hasil.html")   
+#@app.route("/admin/home")
+#def home():
+ #   cur =  mysql.connection.cursor()
+  #  cur.execute("Select * from login") 
+   # home = cur.fetchall()    
+    #print(home)
+    #return render_template("admin/home.html", home=home) 
+#CRUD ADMIN VIEW
 @app.route("/admin/tampiladmin")
 def tampiladmin():
     cur =  mysql.connection.cursor()
@@ -147,7 +141,7 @@ def tampiladmin():
     data = cur.fetchall()    
     print(data)
     return render_template("admin/tampil_admin.html", data=data) 
-# CRUD ADMIN TAMBAH
+#CRUD ADMIN TAMBAH
 @app.route("/admin/tambah", methods=['GET','POST'])
 def tambahadmin(): 
     if request.method=='POST':
@@ -162,7 +156,7 @@ def tambahadmin():
         return redirect(url_for('tampiladmin')) 
     else:
         return render_template('admin/v_tambah_admin.html')     
-# CRUD ADMIN HAPUS
+#CRUD ADMIN HAPUS
 @app.route("/admin/hapus/<id>")
 def deleteadmin(id): 
     cur =  mysql.connection.cursor()
@@ -198,7 +192,7 @@ def tampilgb():
     gayabelajar = cur.fetchall()
     cur.close()
     return render_template("admin/view_gayabelajar.html", gayabelajar=gayabelajar) 
-# BAGIAN EDIT GAYA BELJAR
+#BAGIAN EDIT GAYA BELJAR
 @app.route("/admin/editgayabelajar/<id_gayabelajar>", methods=['GET','POST'])
 def editgayabelajar(id_gayabelajar):
     cur = mysql.connection.cursor()
@@ -214,7 +208,7 @@ def editgayabelajar(id_gayabelajar):
         editgayabelajar = cur.fetchall()
         return render_template('admin/v_editgb.html',editgayabelajar=editgayabelajar)
 
-# BAGIAN TAMPIL PERTANYAAN
+#BAGIAN TAMPIL PERTANYAAN
 @app.route("/admin/tampil_pertanyaan")
 def tampil_pertanyaan():
     cur = mysql.connection.cursor()
@@ -223,7 +217,7 @@ def tampil_pertanyaan():
     cur.close()
     return render_template("admin/view_pertanyaan.html", pertanyaan=pertanyaan)    
 
-# BAGIAN EDIT PERTANYAAN 
+#BAGIAN EDIT PERTANYAAN 
 @app.route("/admin/editpertanyaan/<id_pertanyaan>", methods=['GET','POST'])
 def editpertanyaan(id_pertanyaan):
     cur = mysql.connection.cursor()
@@ -242,7 +236,7 @@ def editpertanyaan(id_pertanyaan):
         editpertanyaan = cur.fetchall()
         return render_template('admin/v_editpertanyaan.html',editpertanyaan=editpertanyaan)
     
-# LOGOUT
+#LOGOUT
 @app.route("/logout")
 def logout():
     session['loggedin']=False
@@ -265,8 +259,8 @@ def pertanyaan_inserthasil():
     siswapertanyaan  = cur.fetchall()
     cur.close()
     return render_template("siswa/Ujian_Online.html", siswapertanyaan=siswapertanyaan)
-# PREDIKSI
-# manual
+#PREDIKSI
+#manual
 @app.route("/siswa/predict", methods=['POST'])
 def predict():
     json =[]
@@ -371,7 +365,7 @@ def uploadfile():
         return jsonify({"msg":"tidak ada file excell yang dipilih"})
     if file and allowed_file(file.filename):
         df_siswa = pd.read_excel(file)
-#    OTOMATIS EXCEL
+    #OTOMATIS EXCEL
         dataset = pd.read_excel("model/Acoba.xlsx")
         x = dataset.iloc[:,[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]].values
         y = dataset.iloc[:, -1].values
@@ -416,7 +410,7 @@ def uploadfile():
     else:
         return jsonify({"msg":"format file harus xlsx "})
 
-# BAGIAN HISTORI
+#BAGIAN HISTORI
 @app.route("/admin/hasiltes/<id>")
 def hasil(id):
     cur = mysql.connection.cursor()
@@ -439,35 +433,35 @@ def rekap():
     value = [int(convertTuple(visual)),int(convertTuple(audio)),int(convertTuple(membacadanmenulis)),int(convertTuple(kinestetik))]
     return render_template('admin/rekap.html',value=value)
 def clean_up_sentence(sentence):
-#    tokenize the pattern - split words into array
+    # tokenize the pattern - split words into array
     sentence_words = nltk.word_tokenize(sentence)
-#    stem each word - create short form for word
+    # stem each word - create short form for word
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     return sentence_words
 
-#return bag of words array: 0 or 1 for each word in the bag that exists in the sentence
+# return bag of words array: 0 or 1 for each word in the bag that exists in the sentence
 
 def bow(sentence, words, show_details=True):
-#    tokenize the pattern
+    # tokenize the pattern
     sentence_words = clean_up_sentence(sentence)
-#    bag of words - matrix of N words, vocabulary matrix
+    # bag of words - matrix of N words, vocabulary matrix
     bag = [0]*len(words)  
     for s in sentence_words:
         for i,w in enumerate(words):
             if w == s: 
-#                assign 1 if current word is in the vocabulary position
+                # assign 1 if current word is in the vocabulary position
                 bag[i] = 1
                 if show_details:
                     print ("found in bag: %s" % w)
     return(np.array(bag))
 
 def predict_class(sentence, model):
-#    filter out predictions below a threshold
+    # filter out predictions below a threshold
     p = bow(sentence, words,show_details=False)
     res = model.predict(np.array([p]))[0]
     ERROR_THRESHOLD = 0.25
     results = [[i,r] for i,r in enumerate(res) if r>ERROR_THRESHOLD]
-#    sort by strength of probability
+    # sort by strength of probability
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
     for r in results:
@@ -492,3 +486,12 @@ def chatbot_response(msg):
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
+
+#@app.route("/rekap")
+#def rekap():
+ #   return render_template('admin/rekap.html')
+
+
+
+
+

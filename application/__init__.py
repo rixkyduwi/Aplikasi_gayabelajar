@@ -7,7 +7,7 @@ import string
 from time import time
 import time
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -20,7 +20,10 @@ import joblib
 ALLOWED_EXTENSIONS = set(['xlsx'])
 def allowed_file(filename):     
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
+app.config['host']= os.environ.get('host')
 # time sesion
 app.config.update(dict(
 SECRET_KEY="powerful secretkey",
@@ -57,12 +60,14 @@ def roles_required(role):
  
         return wrapper
     return decorator
-#Konfigurasi Mysql
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'databasegaya'
-#Intialize MySQL
+# Konfigurasi Mysql
+
+
+app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
+app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
+# Intialize MySQL
 mysql = MySQL(app)
 
 #SOURCE CODE CHATBOT
@@ -490,8 +495,3 @@ def get_bot_response():
 #@app.route("/rekap")
 #def rekap():
  #   return render_template('admin/rekap.html')
-
-
-
-
-

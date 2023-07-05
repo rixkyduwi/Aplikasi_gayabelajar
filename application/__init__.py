@@ -108,7 +108,7 @@ def aksilogin():
         if password == user[5]:
             session['level'] = user[4]
             if user[4] == 'admin':
-                return redirect(url_for('tampiladmin'))
+                return redirect(url_for('tampil_admin'))
             elif user[4] == "siswa":
                 return redirect(url_for('view_siswa'))
         else:
@@ -139,15 +139,17 @@ def viewsiswa():
     #print(home)
     #return render_template("admin/home.html", home=home) 
 #CRUD ADMIN VIEW
-@app.route("/admin/tampiladmin")
-def tampiladmin():
+@app.route("/admin/tampil_admin", endpoint="tampil_admin")
+@roles_required('admin')
+def tampil_admin():
     cur =  mysql.connection.cursor()
     cur.execute("Select * from login") 
     data = cur.fetchall()    
     print(data)
     return render_template("admin/tampil_admin.html", data=data) 
 #CRUD ADMIN TAMBAH
-@app.route("/admin/tambah", methods=['GET','POST'])
+@app.route("/admin/tambah", methods=['POST'], endpoint="admin_tambah")
+@roles_required('admin')
 def tambahadmin(): 
     if request.method=='POST':
         no_induk= request.form['no_induk']
@@ -158,18 +160,19 @@ def tambahadmin():
         cur =  mysql.connection.cursor()
         cur.execute("INSERT INTO login(no_induk,nama,kelas,password,level) values(%s,%s,%s,%s,%s) ",(no_induk,nama,kelas,password,level)) 
         mysql.connection.commit() 
-        return redirect(url_for('tampiladmin')) 
-    else:
-        return render_template('admin/v_tambah_admin.html')     
+        return redirect(url_for('tampil_admin')) 
+      
 #CRUD ADMIN HAPUS
 @app.route("/admin/hapus/<id>")
 def deleteadmin(id): 
     cur =  mysql.connection.cursor()
     cur.execute("delete from login where id_login= %s",(id,)) 
     mysql.connection.commit() 
-    return redirect(url_for('tampiladmin'))
+    return redirect(url_for('tampil_admin'))
+
 #CRUD ADMIN EDIT
-@app.route("/admin/editadmin/<id_admin>", methods=['GET','POST'])
+@app.route("/admin/editadmin/<id_admin>", methods=['GET','POST'],endpoint="edit_admin")
+@roles_required('admin')
 def editadmin(id_admin):
     cur= mysql.connection.cursor()
     if request.method=='POST':
@@ -181,7 +184,7 @@ def editadmin(id_admin):
         cur.execute(' UPDATE login SET nama =%s,kelas =%s, password =%s, level=%s WHERE no_induk=%s',(nama,kelas,password,level,id_admin))
         mysql.connection.commit()
         # cur.close()
-        return redirect(url_for('tampiladmin'))
+        return redirect(url_for('tampil_admin'))
     else:
         # cur = mysql.connection.cursor()
         cur.execute('SELECT id_login,no_induk,nama,kelas,password,level FROM login WHERE no_induk=%s ', (id_admin, ))
@@ -190,15 +193,18 @@ def editadmin(id_admin):
         return render_template("admin/v_editadmin.html", editadmin=editadmin)
 
 # BAGIAN TAMPIL GAYA BELAJAR
-@app.route("/admin/tampil_gb" , methods=['GET'])
+@app.route("/admin/tampil_gb" , methods=['GET'], endpoint="tampil_gayabelajar")
+@roles_required('admin')
 def tampilgb():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM jenis_gayabelajar")
     gayabelajar = cur.fetchall()
     cur.close()
     return render_template("admin/view_gayabelajar.html", gayabelajar=gayabelajar) 
+
 #BAGIAN EDIT GAYA BELJAR
-@app.route("/admin/editgayabelajar/<id_gayabelajar>", methods=['GET','POST'])
+@app.route("/admin/editgayabelajar/<id_gayabelajar>", methods=['GET','POST'], endpoint="edit_gayabelajar")
+@roles_required('admin')
 def editgayabelajar(id_gayabelajar):
     cur = mysql.connection.cursor()
     if request.method=='POST':
@@ -214,7 +220,8 @@ def editgayabelajar(id_gayabelajar):
         return render_template('admin/v_editgb.html',editgayabelajar=editgayabelajar)
 
 #BAGIAN TAMPIL PERTANYAAN
-@app.route("/admin/tampil_pertanyaan")
+@app.route("/admin/tampil_pertanyaan",endpoint="tampilpertanyaan_")
+@roles_required('admin')
 def tampil_pertanyaan():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM pertanyaan")
@@ -223,7 +230,8 @@ def tampil_pertanyaan():
     return render_template("admin/view_pertanyaan.html", pertanyaan=pertanyaan)    
 
 #BAGIAN EDIT PERTANYAAN 
-@app.route("/admin/editpertanyaan/<id_pertanyaan>", methods=['GET','POST'])
+@app.route("/admin/editpertanyaan/<id_pertanyaan>", methods=['GET','POST'], endpoint="edit_pertanyaan")
+@roles_required('admin')
 def editpertanyaan(id_pertanyaan):
     cur = mysql.connection.cursor()
     if request.method=='POST':
@@ -254,7 +262,8 @@ def logout():
     session['level'] = ""
     return redirect(url_for("index"))
 
-@app.route("/siswa/pertanyaan")
+@app.route("/siswa/pertanyaan",endpoint="_pertanyaan")
+@roles_required('siswa')
 def pertanyaan():
     return render_template('siswa/view_siswa.html')
 @app.route("/siswa/pertanyaan/insertHasil")
@@ -266,7 +275,8 @@ def pertanyaan_inserthasil():
     return render_template("siswa/Ujian_Online.html", siswapertanyaan=siswapertanyaan)
 #PREDIKSI
 #manual
-@app.route("/siswa/predict", methods=['POST'])
+@app.route("/siswa/predict", methods=['POST'], endpoint="predict")
+@roles_required('admin')
 def predict():
     json =[]
     for i in range(1,21):
@@ -334,14 +344,18 @@ def predict():
         data = (session['username'], a[0], a[1],tanggal)
         kembali = "/siswa"
         return render_template ('siswa/prediksi.html', data = data,kembali=kembali)
-@app.route('/admin/prediksi/<id>')
+    
+@app.route('/admin/prediksi/<id>', endpoint="prediksi_id")
+@roles_required('admin')
 def prediksiindex(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT hasil.Nama, jenis_gayabelajar.gaya_belajar, jenis_gayabelajar.saran_belajar, hasil.Tanggal_tes FROM hasil inner join jenis_gayabelajar on jenis_gayabelajar.id_gayabelajar = hasil.Gaya_belajar where hasil.id_hasil = %s",(id,))
     data = cur.fetchone()
-    kembali = "/admin/tampiladmin"
+    kembali = "/admin/tampil_admin"
     return render_template('siswa/prediksi.html',data=data,kembali=kembali)
-@app.route('/admin/upload_file')
+
+@app.route('/admin/upload_file', endpoint="upload__file")
+@roles_required('admin')
 def uploadindex():
     cur =  mysql.connection.cursor()
     cur.execute("Select * from hasil") 
@@ -354,14 +368,17 @@ def uploadindex():
     print(gayabelajar)
     return render_template('admin/uploadindex.html',data=data,datadetail=datadetail,gayabelajar=gayabelajar)
 
-@app.route('/admin/hapusDataset/<id>')
+@app.route('/admin/hapusDataset/<id>',endpoint="hapusdata")
+@roles_required('admin')
 def deletedataset(id):
     cur =  mysql.connection.cursor()
     cur.execute("update hasil set status='delete' where id_hasil= %s",(id,)) 
     cur.execute("update detail_hasil set status='delete' where id_hasil= %s",(id,)) 
     mysql.connection.commit() 
     return redirect(url_for('uploadindex'))
-@app.route('/admin/predict', methods=["POST"])
+
+@app.route('/admin/predict', methods=["POST"], endpoint="predict___")
+@roles_required('admin')
 def uploadfile():
     if 'upload' not in request.files:
         return jsonify({"msg":"tidak ada form upload"})
@@ -416,7 +433,8 @@ def uploadfile():
         return jsonify({"msg":"format file harus xlsx "})
 
 #BAGIAN HISTORI
-@app.route("/admin/hasiltes/<id>")
+@app.route("/admin/hasiltes/<id>", endpoint="admin_hasiltes")
+@roles_required('admin')
 def hasil(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT id_hasil,Nama, Tanggal_tes, Gaya_belajar FROM hasil where hasil.no_induk= %s ", (id,))
@@ -424,7 +442,8 @@ def hasil(id):
     print("jln")
     print(data)
     return render_template("admin/view_detail_hasil.html", data=data)
-@app.route("/admin/rekap")
+@app.route("/admin/rekap",endpoint="__rekap")
+@roles_required('admin')
 def rekap():
     cur = mysql.connection.cursor()
     cur.execute("SELECT Count(*) from hasil where Gaya_Belajar = 0")
@@ -495,3 +514,6 @@ def get_bot_response():
 #@app.route("/rekap")
 #def rekap():
  #   return render_template('admin/rekap.html')
+
+
+

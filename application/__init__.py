@@ -9,7 +9,7 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import hashlib
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix
@@ -97,15 +97,18 @@ def aksilogin():
     cur =  mysql.connection.cursor()
     cur.execute("Select id_login,no_induk, nama,kelas, level, password from login where nama = %s ",(username,)) 
     user = cur.fetchone()
-    if user is not None and len(user) > 0:        
-        session['loggedin']=True
-        session['id'] = user[0]
-        session['role'] = user[4]
-        session['kelas'] = user[3]
-        session['no_induk'] = user[1]
-        session['username'] = user[2]
-        session['time']= tanggal
-        if password == user[5]:
+    if user is not None and len(user) > 0: 
+        h = hashlib.md5(password.encode())
+        print(h.hexdigest())
+        print(user[5])
+        if h.hexdigest() == user[5]:       
+            session['loggedin']=True
+            session['id'] = user[0]
+            session['role'] = user[4]
+            session['kelas'] = user[3]
+            session['no_induk'] = user[1]
+            session['username'] = user[2]
+            session['time']= tanggal
             session['level'] = user[4]
             if user[4] == 'admin':
                 return redirect(url_for('tampil_admin'))
@@ -143,7 +146,7 @@ def viewsiswa():
 @roles_required('admin')
 def tampil_admin():
     cur =  mysql.connection.cursor()
-    cur.execute("Select * from login") 
+    cur.execute("SELECT * FROM login") 
     data = cur.fetchall()    
     print(data)
     return render_template("admin/tampil_admin.html", data=data) 
@@ -166,7 +169,7 @@ def tambahadmin():
 @app.route("/admin/hapus/<id>")
 def deleteadmin(id): 
     cur =  mysql.connection.cursor()
-    cur.execute("delete from login where id_login= %s",(id,)) 
+    cur.execute("DELETE FROM login WHERE id_login = %s",(id,)) 
     mysql.connection.commit() 
     return redirect(url_for('tampil_admin'))
 

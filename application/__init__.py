@@ -6,7 +6,7 @@ import random
 import string
 from time import time
 import time
-import numpy as np
+import numpy 
 import matplotlib.pyplot as plt
 import pandas as pd
 import hashlib
@@ -72,10 +72,14 @@ mysql = MySQL(app)
 
 #SOURCE CODE CHATBOT
 import nltk
+import pickle,json
+import tflearn
 nltk.download('popular')
+from nltk.stem.lancaster import LancasterStemmer
+stemmer = LancasterStemmer()
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
-
+intents = json.loads(open('chatbot/data.json').read())
 
 #FUNGSI LOGIN
 @app.route("/")
@@ -308,7 +312,7 @@ def predict():
     classifier = GaussianNB()
     classifier.fit(x_train, y_train)
     test_data = json #jawaban hasil input
-    test_data = np.array(test_data)
+    test_data = numpy.array(test_data)
     test_data = test_data.reshape(1,-1)#
     print(test_data)
     file = open("model/model_baru.pkl","rb")
@@ -454,73 +458,61 @@ def rekap():
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
-    respon = chatbot_response(userText)
-    return jsonify([respon])
-def clean_up_sentence(sentence):
-    # tokenize the pattern - split words into array
-    sentence_words = nltk.word_tokenize(sentence)
-    # stem each word - create short form for word
-    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
-    return sentence_words
+    return chatbot_response(userText)
 
 # return bag of words array: 0 or 1 for each word in the bag that exists in the sentence
-import pickle
-import numpy as np
-from keras.models import load_model
-model = load_model('chatbot/model.h5')
-import json
-import random
-intents = json.loads(open('chatbot/data.json').read())
-words = pickle.load(open('chatbot/texts.pkl','rb'))
-classes = pickle.load(open('chatbot/labels.pkl','rb'))
-def bow(sentence, words, show_details=True):
-    # tokenize the pattern
-    sentence_words = clean_up_sentence(sentence)
-    # bag of words - matrix of N words, vocabulary matrix
-    bag = [0]*len(words)  
-    for s in sentence_words:
-        for i,w in enumerate(words):
-            if w == s: 
-                # assign 1 if current word is in the vocabulary position
-                bag[i] = 1
-                if show_details:
-                    print ("found in bag: %s" % w)
-    return(np.array(bag))
+try:
+  with open("chatbot/data.pickle", "rb") as f:
+    words, labels, training, output = pickle.load(f)
+except:
+  words = []
+  labels = []
+  docs_x = []
+  docs_y = []
+with open('chatbot/data.json') as user_file:
+  data = json.load(user_file)
+with open("chatbot/data.pickle", "wb") as f:
+    pickle.dump((words, labels, training, output), f)
+net = tflearn.input_data(shape=[None, len(training[0])])
+net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
+net = tflearn.regression(net)
 
-def predict_class(sentence, model):
-    # filter out predictions below a threshold
-    p = bow(sentence, words,show_details=False)
-    res = model.predict(np.array([p]))[0]
-    ERROR_THRESHOLD = 0.25
-    results = [[i,r] for i,r in enumerate(res) if r>ERROR_THRESHOLD]
-    # sort by strength of probability
-    results.sort(key=lambda x: x[1], reverse=True)
-    return_list = []
-    for r in results:
-        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
-    return return_list
+model = tflearn.DNN(net)
+model.load('chatbot/modell.tflearn')
+def bag_of_words(s, words):
+  bag = [0 for _ in range(len(words))]
+  s_words = nltk.word_tokenize(s)
+  s_words = [stemmer.stem(word.lower()) for word in s_words]
 
-def getResponse(ints, intents_json):
-    tag = ints[0]['intent']
-    list_of_intents = intents_json['intents']
-    for i in list_of_intents:
-        if(i['tag']== tag):
-            result = random.choice(i['responses'])
-            break
-    return result
+  for se in s_words:
+    for i, w in enumerate(words):
+      if w == se:
+        bag[i] = 1
+
+  return numpy.array(bag)
 
 def chatbot_response(msg):
-    ints = predict_class(msg, model)
-    res = getResponse(ints, intents)
-    return res
-
-
-
-#@app.route("/rekap")
-#def rekap():
- #   return render_template('admin/rekap.html')
-
-
-
-
-
+    results = model.predict([bag_of_words(msg, words)])
+    results_index = numpy.argmax(results)
+    tag = labels[results_index]
+    print(tag)
+    tag = tag.replace(' ', '_')
+    list_of_intents = data['intents']
+    print(list_of_intents)
+    result=""
+    for i in list_of_intents:
+        if "greating" == tag:
+            
+            responses = i['responses'].append()
+            result = random.choice(i['responses'])
+            break
+        elif(i['tag']== tag):
+            result = random.choice(i['responses'])
+            break
+    print(result)
+    if result == "":
+        result = "[{'response':'maaf saya tidak tahu'}]"
+        # result = "maaf saya tidak tahu"
+    return result

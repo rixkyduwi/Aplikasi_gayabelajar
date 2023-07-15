@@ -34,7 +34,7 @@ google-auth-oauthlib
 google-pasta
 grpcio
 h5py
-idn
+idna
 itsdangerous
 jax
 Jinja2

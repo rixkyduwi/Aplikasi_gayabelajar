@@ -75,15 +75,7 @@ import nltk
 nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
-import pickle
-import numpy as np
-from keras.models import load_model
-model = load_model('chatbot/model.h5')
-import json
-import random
-intents = json.loads(open('chatbot/data.json').read())
-words = pickle.load(open('chatbot/texts.pkl','rb'))
-classes = pickle.load(open('chatbot/labels.pkl','rb'))
+
 
 #FUNGSI LOGIN
 @app.route("/")
@@ -459,6 +451,11 @@ def rekap():
     visual = cur.fetchone()
     value = [int(convertTuple(visual)),int(convertTuple(audio)),int(convertTuple(membacadanmenulis)),int(convertTuple(kinestetik))]
     return render_template('admin/rekap.html',value=value)
+@app.route("/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    respon = chatbot_response(userText)
+    return jsonify([respon])
 def clean_up_sentence(sentence):
     # tokenize the pattern - split words into array
     sentence_words = nltk.word_tokenize(sentence)
@@ -467,7 +464,15 @@ def clean_up_sentence(sentence):
     return sentence_words
 
 # return bag of words array: 0 or 1 for each word in the bag that exists in the sentence
-
+import pickle
+import numpy as np
+from keras.models import load_model
+model = load_model('chatbot/model.h5')
+import json
+import random
+intents = json.loads(open('chatbot/data.json').read())
+words = pickle.load(open('chatbot/texts.pkl','rb'))
+classes = pickle.load(open('chatbot/labels.pkl','rb'))
 def bow(sentence, words, show_details=True):
     # tokenize the pattern
     sentence_words = clean_up_sentence(sentence)
@@ -509,10 +514,7 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     return res
 
-@app.route("/get")
-def get_bot_response():
-    userText = request.args.get('msg')
-    return chatbot_response(userText)
+
 
 #@app.route("/rekap")
 #def rekap():
